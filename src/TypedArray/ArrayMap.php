@@ -1,8 +1,8 @@
 <?php
 
-namespace Diacdg\PHPArray;
+namespace Diacdg\TypedArray;
 
-class ArrayMap extends AbstractArray
+class ArrayMap extends AbstractTypedArray
 {
     protected $offsetType;
     

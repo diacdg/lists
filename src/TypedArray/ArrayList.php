@@ -1,8 +1,8 @@
 <?php
 
-namespace Diacdg\PHPArray;
+namespace Diacdg\TypedArray;
 
-class ArrayList extends AbstractArray
+class ArrayList extends AbstractTypedArray
 {
     protected function checkOffset($offset): void
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\PHPArray;
+namespace Tests\TypedArray;
 
 use PHPUnit\Framework\TestCase;
-use Diacdg\PHPArray\ArrayMap;
+use Diacdg\TypedArray\ArrayMap;
 
 class ArrayMapTest extends TestCase
 {

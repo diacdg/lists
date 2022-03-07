@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\PHPArray;
+namespace Tests\TypedArray;
 
 use PHPUnit\Framework\TestCase;
-use Diacdg\PHPArray\ArrayList;
+use Diacdg\TypedArray\ArrayList;
 
 class ArrayListTest extends TestCase
 {
@@ -27,6 +27,7 @@ class ArrayListTest extends TestCase
             ['string', 'valid-value'],
             ['array', []],
             ['object', new \stdClass()],
+            ['callable', [$this, 'listDataProvider']],
             [\stdClass::class, new \stdClass()],
         ];
     }
@@ -72,5 +73,12 @@ class ArrayListTest extends TestCase
         unset($list[1]);
 
         $this->assertCount(2, $list);
+    }
+
+    public function testCallableList(): void
+    {
+        $list = new ArrayList('callable', ['gettype', [$this, 'testCallableList'], function() {}]);
+
+        $this->assertCount(3, $list);
     }
 }

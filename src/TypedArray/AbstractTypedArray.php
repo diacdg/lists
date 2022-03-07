@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Diacdg\PHPArray;
+namespace Diacdg\TypedArray;
 
-abstract class AbstractArray extends \ArrayObject
+abstract class AbstractTypedArray extends \ArrayObject
 {
     protected $valueType;
 
@@ -33,8 +33,8 @@ abstract class AbstractArray extends \ArrayObject
 
     protected function checkType($value): void
     {
-        if (gettype($value) !== strtolower($this->valueType) && !$value instanceof $this->valueType) {
-            throw new \InvalidArgumentException('Value must be of type: ' . $this->valueType . " but value of type: " . gettype($value) . " given.");
+        if (gettype($value) !== strtolower($this->valueType) && !$value instanceof $this->valueType && !($this->valueType === 'callable' && is_callable($value))) {
+            throw new \InvalidArgumentException('Value must be of type ' . $this->valueType . " but value of type " . gettype($value) . " given.");
         }
     }
 

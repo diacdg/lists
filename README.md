@@ -1,9 +1,9 @@
-# php strict array
+# PHP typed array
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/diacdg/phparray/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/diacdg/phparray/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/diacdg/phparray/badges/build.png?b=master)](https://scrutinizer-ci.com/g/diacdg/phparray/build-status/master)
 [![Code Coverage](https://scrutinizer-ci.com/g/diacdg/phparray/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/diacdg/phparray/?branch=master)
 
-It is an extension for ArrayObject that accept only elements and keys of a provided type. 
+is an extension for [ArrayObject class](https://www.php.net/manual/en/class.arrayobject.php) that accept only elements and keys of a specified type.
 
 ### Installation
 ```
@@ -15,8 +15,8 @@ composer require diacdg/phparray
 ```php
 <?php
 
-use Diacdg\PHPArray\ArrayList;
-use Diacdg\PHPArray\ArrayMap;
+use Diacdg\TypedArray\ArrayList;
+use Diacdg\TypedArray\ArrayMap;
 
 $list = new ArrayList('integer', [11, 22, 33]);
 foreach ($list as $value) {
@@ -28,6 +28,15 @@ foreach ($list as $value) {
     33
  */
  
+ 
+$listOfCallable = new ArrayList('callable', ['gettype', function() {print 'Ok!';}]);
+/* output:
+Array
+(
+    [0] => gettype
+    [1] => Closure Object (...)
+)
+*/
 
 $objectsList = new ArrayList(\stdClass::class, [new \stdClass(), new \stdClass()]);
 foreach ($objectsList as $key => $object) {
@@ -62,4 +71,10 @@ Array
     [create-report] => 1
 ) 
  */
+
+
+$list = new ArrayList('integer', [11, 22, 'invalid-value']);
+/* output:
+InvalidArgumentException : Value must be of type integer but value of type string given.
+*/
 ```
