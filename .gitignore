@@ -3,4 +3,6 @@ vendor/
 .DS_Store
 .php_cs.cache
 .idea/
-.phpunit.result.cache
+.phpunit*.cache
+junit.xml
+clover.xml
