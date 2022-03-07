@@ -12,8 +12,7 @@ class ArrayMapTest extends TestCase
      */
     public function testCreateList(string $offsetType, string $valueType, $offset, $value): void
     {
-        $list = new ArrayMap($offsetType, $valueType);
-        $list[$offset] = $value;
+        $list = new ArrayMap($offsetType, $valueType, [$offset => $value]);
 
         $this->assertSame($value, $list[$offset]);
     }

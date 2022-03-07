@@ -5,13 +5,14 @@ namespace Diacdg\PHPArray;
 
 abstract class AbstractArray extends \ArrayObject
 {
-    protected $elements = [];
     protected $valueType;
 
-    public function __construct(string $valueType) {
-        parent::__construct();
-
+    public function __construct(string $valueType, array $array = [], int $flags = 0, string $iteratorClass = "ArrayIterator") {
         $this->valueType = $valueType;
+
+        $this->checkAllElements($array);
+
+        parent::__construct($array, $flags, $iteratorClass);
     }
 
     public function offsetSet($offset, $value)
@@ -25,10 +26,7 @@ abstract class AbstractArray extends \ArrayObject
 
     public function exchangeArray($array)
     {
-        array_walk($array, function($value, $offset) {
-            $this->checkOffset($offset);
-            $this->checkType($value);
-        });
+        $this->checkAllElements($array);
 
         parent::exchangeArray($array);
     }
@@ -41,4 +39,12 @@ abstract class AbstractArray extends \ArrayObject
     }
 
     abstract protected function checkOffset($offset): void;
+
+    private function checkAllElements(array $array): void
+    {
+        array_walk($array, function ($value, $offset) {
+            $this->checkOffset($offset);
+            $this->checkType($value);
+        });
+    }
 }
