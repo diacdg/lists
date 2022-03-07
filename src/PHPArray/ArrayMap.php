@@ -1,8 +1,8 @@
 <?php
 
-namespace Diacdg\Util;
+namespace Diacdg\PHPArray;
 
-class Map extends SimpleList
+class ArrayMap extends AbstractArray
 {
     protected $offsetType;
     
@@ -22,10 +22,5 @@ class Map extends SimpleList
         if (gettype($offset) !== strtolower($this->offsetType)) {
             throw new \InvalidArgumentException('Offest must be of type: ' . $this->offsetType . '.');
         }
-    }
-
-    protected function addElementToList($offset, $value): void
-    {
-        $this->elements[$offset] = $value;
     }
 }

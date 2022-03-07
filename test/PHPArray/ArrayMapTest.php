@@ -1,18 +1,18 @@
 <?php
 
-namespace Tests\Util;
+namespace Tests\PHPArray;
 
 use PHPUnit\Framework\TestCase;
-use Diacdg\Util\Map;
+use Diacdg\PHPArray\ArrayMap;
 
-class MapTest extends TestCase
+class ArrayMapTest extends TestCase
 {
     /**
      * @dataProvider mapDataProvider
      */
     public function testCreateList(string $offsetType, string $valueType, $offset, $value): void
     {
-        $list = new Map($offsetType, $valueType);
+        $list = new ArrayMap($offsetType, $valueType);
         $list[$offset] = $value;
 
         $this->assertSame($value, $list[$offset]);
@@ -31,7 +31,7 @@ class MapTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $list = new Map('integer', 'integer');
+        $list = new ArrayMap('integer', 'integer');
         $list[1] = 'invalid-value';
     }
 
@@ -39,7 +39,7 @@ class MapTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $list = new Map('integer', 'integer');
+        $list = new ArrayMap('integer', 'integer');
         $list['invalid-offset'] = 1;
     }
 }

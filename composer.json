@@ -1,5 +1,5 @@
 {
-    "name": "diacdg/util",
+    "name": "diacdg/phparray",
     "description": "Util classes for list and map",
     "type": "library",
     "require": {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Tests\Util;
+namespace Tests\PHPArray;
 
 use PHPUnit\Framework\TestCase;
-use Diacdg\Util\SimpleList;
+use Diacdg\PHPArray\ArrayList;
 
-class SimpleListTest extends TestCase
+class ArrayListTest extends TestCase
 {
     /**
      * @dataProvider listDataProvider
      */
     public function testCreateList(string $type, $value): void
     {
-        $list = new SimpleList($type);
+        $list = new ArrayList($type);
         $list[] = $value;
 
         $this->assertSame($value, $list[0]);
@@ -35,15 +35,37 @@ class SimpleListTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $list = new SimpleList('integer');
+        $list = new ArrayList('integer');
         $list[] = 'invalid-value';
     }
 
-    public function testInvalidOffeset(): void
+    public function testExchangeArray(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $list = new SimpleList('integer');
-        $list[1] = 1;
+        $list = new ArrayList('string');
+        $list->exchangeArray(['invalid-offset'=>1]);
+    }
+
+    public function testInvalidOffset(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $list = new ArrayList('integer');
+        $list['offset'] = 1;
+    }
+
+    public function testRemoveOffset(): void
+    {
+        $list = new ArrayList('integer');
+        $list[] = 1;
+        $list[] = 2;
+        $list[] = 3;
+
+        $this->assertCount(3, $list);
+
+        unset($list[1]);
+
+        $this->assertCount(2, $list);
     }
 }
