@@ -18,6 +18,13 @@ class ArrayMapTest extends TestCase
         $this->assertSame($value, $list[$offset]);
     }
 
+    public function testCreateInvalidList(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        new ArrayMap('boolean', 'integer');
+    }
+
     public function mapDataProvider(): array
     {
         return [

@@ -41,9 +41,14 @@ class ArrayListTest extends TestCase
 
     public function testExchangeArray(): void
     {
+        $elements = [1, 2, 3];
+        $list = new ArrayList('integer');
+        $list->exchangeArray($elements);
+
+        $this->assertSame($elements, (array) $list);
+
         $this->expectException(\InvalidArgumentException::class);
 
-        $list = new ArrayList('string');
         $list->exchangeArray(['invalid-offset'=>1]);
     }
 
