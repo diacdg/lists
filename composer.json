@@ -1,0 +1,24 @@
+{
+    "name": "diacdg/util",
+    "description": "Util classes for list and map",
+    "type": "library",
+    "require": {
+        "php": ">=7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3.3"
+    },
+    "license": "free",
+    "autoload": {
+        "psr-4": {
+            "Diacdg\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Doru Diaconescu",
+            "email": "diacdg@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
